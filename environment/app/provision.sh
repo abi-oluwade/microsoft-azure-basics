@@ -15,11 +15,25 @@ sudo apt install npm
 # install pm2
 sudo npm install pm2 -g
 
-sudo apt-get install nginx -y
+# # install nginx
+# sudo apt-get install nginx -y
+#
+# # remove the old file and add our one
+# sudo rm /etc/nginx/sites-available/default
+# sudo cp /home/ubuntu/environment/nginx.default /etc/nginx/sites-available/default
+#
+# # finally, restart the nginx service so the new config takes hold
+# sudo service nginx restart
 
-# remove the old file and add our one
-sudo rm /etc/nginx/sites-available/default
-sudo cp /home/ubuntu/environment/nginx.default /etc/nginx/sites-available/default
+# install apache
+ sudo apt-get install apache2
+ sudo systemctl reload apache2.service
 
-# finally, restart the nginx service so the new config takes hold
-sudo service nginx restart
+# remove the old apache file and add new one
+sudo rm /etc/apache2/sites-available/000-default.conf
+sudo cp /home/ubuntu/environment/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+# make needed changes and then restart apache
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo service apache2 restart
